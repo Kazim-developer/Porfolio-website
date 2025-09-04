@@ -1,0 +1,276 @@
+@import url("https://fonts.googleapis.com/css2?family=Sora:wght@100;200;300;400;500;600;700;800&display=swap");
+
+@import "tailwindcss";
+
+:root {
+  font-size: 62.5%;
+}
+
+:root {
+  --gradient-color: linear-gradient(
+    315deg,
+    hsla(205, 37%, 10%, 1) 13%,
+    hsla(207, 93%, 42%, 1) 100%
+  );
+  --font-sora: "Sora", sans-serif;
+  --dashboard-heading: clamp(2rem, calc(2.5vw + 0.05rem), 5rem);
+  --dashboard-heading-color: linear-gradient(90deg, #67e8f9, #06b6d4);
+  --heading-size: clamp(1.5rem, calc(1.5vw + 0.05rem), 5rem);
+  --para-size: clamp(1.5rem, calc(1vw + 0.05rem), 5rem);
+  --background-clip: #376fab;
+  --heading-color: #9ccbf7;
+  --background-color: #101b23;
+}
+
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 100px;
+}
+
+body {
+  background-color: var(--background-color);
+  font-family: var(--font-sora);
+  position: relative;
+  height: 100vh;
+  overflow-y: scroll;
+  scrollbar-gutter: stable;
+}
+
+main {
+  transform: translateY(100px);
+}
+
+h1,
+a {
+  font-size: var(--heading-size);
+  font-family: var(--font-sora);
+}
+
+p,
+h3 {
+  font-size: var(--para-size);
+}
+
+@layer components {
+  .nav-item {
+    @apply list-none text-white select-none;
+  }
+  .hover-effect {
+    cursor: pointer;
+    position: relative;
+    transition: color 300ms;
+  }
+  .hover-effect span {
+    width: 0;
+    height: 2px;
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    background-color: var(--heading-color);
+    transition: width 300ms;
+  }
+  .hover-effect:hover span {
+    width: 100%;
+  }
+  .hover-effect:hover h1 {
+    color: var(--heading-color);
+  }
+
+  .download-btn {
+    list-style: none;
+    color: black;
+    background-color: white;
+    padding: 10px;
+    border-radius: 10px;
+    cursor: pointer;
+    display: inline-block;
+    user-select: none;
+  }
+  .download-btn:active {
+    scale: 0.9;
+  }
+  .download-btn:hover {
+    opacity: 0.8;
+  }
+  .data-file {
+    font-size: var(--para-size);
+  }
+  .grid-container {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-template-rows: 130px minmax(200px, 1fr) minmax(200px, 1fr);
+    grid-template-areas: "box1 box2 box3 box5" "box4 box4 box4 box4" "box4 box4 box4 box4";
+    gap: 1.5em;
+  }
+  .grid-item {
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.6), 0 6px 6px rgba(0, 0, 0, 0.5),
+      0 -2px 6px rgba(255, 255, 255, 0.05);
+    border-radius: 20px;
+    text-align: center;
+  }
+  .chart-div {
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.6), 0 6px 6px rgba(0, 0, 0, 0.5),
+      0 -2px 6px rgba(255, 255, 255, 0.05);
+    border-radius: 20px;
+  }
+  .analysis {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    align-items: center;
+    height: 100%;
+  }
+  .rotated {
+    transform: rotate(180deg);
+  }
+  .dashboard-title,
+  .value {
+    background: var(--dashboard-heading-color);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+}
+
+.content h1 {
+  font-weight: 600;
+  margin-bottom: 3rem;
+}
+.content h1:not(.sub-heading) {
+  color: var(--heading-color);
+}
+
+.story p {
+  line-height: 3rem;
+}
+
+.epilogue p {
+  line-height: 3rem;
+}
+
+.sub-items p::before {
+  content: "➤ ";
+  color: var(--heading-color);
+  font-size: 1.5rem;
+  margin-right: 0.8rem;
+}
+
+.dropdown-btn {
+  position: relative;
+}
+
+.dropdown-btn span {
+  background-color: black;
+  height: 2px;
+  width: 0;
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  transition: width 300ms;
+}
+
+@keyframes fadeInOut {
+  0% {
+    opacity: 0;
+  }
+  50% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+
+#fade-animation {
+  color: #00ff7f;
+  background: transparent;
+  animation: fadeInOut 1.5s ease-in-out infinite;
+}
+.dropdown-btn h1 {
+  color: black;
+  font-weight: normal;
+}
+.dropdown-btn.active h1 {
+  font-weight: 600;
+}
+.dropdown-btn.active span {
+  width: 100%;
+}
+.nav-btn.active h1 {
+  color: var(--heading-color);
+}
+.nav-btn.active span {
+  width: 100%;
+}
+.wrapper h2 {
+  font-size: var(--dashboard-heading);
+  font-weight: 600;
+  & span {
+    font-size: var(--para-size);
+    color: var(--heading-color);
+    cursor: pointer;
+  }
+  & span:hover {
+    text-decoration: underline;
+  }
+  & .analysis p {
+    font-weight: 600;
+  }
+}
+
+@media (max-width: 690px) {
+  .grid-container {
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: minmax(200px, 1fr) repeat(2, 130px);
+    grid-template-areas: "box4 box4" "box1 box2" "box3 box5";
+  }
+}
+
+@media (max-width: 450px) {
+  :root {
+    --para-size: clamp(1.2rem, calc(1vw + 0.05rem), 1.4rem);
+    --heading-size: clamp(1.3rem, calc(1.3vw + 0.05rem), 1.6rem);
+  }
+  .chart-div {
+    overflow: hidden;
+  }
+  .grid-container {
+    grid-template-columns: 1fr;
+    grid-template-rows: minmax(200px, 1fr) repeat(4, 130px);
+    grid-template-areas: "box4" "box1" "box2" "box3" "box5";
+  }
+  /* #selection-dropdown p {
+    font-size: 1rem;
+  } */
+}
+
+/* For Chrome, Edge, Safari */
+.country .menu-items::-webkit-scrollbar,
+.year .menu-items::-webkit-scrollbar {
+  width: 6px; /* make it thin */
+}
+
+.country .menu-items::-webkit-scrollbar-track,
+.year .menu-items::-webkit-scrollbar-track {
+  background: transparent; /* scrollbar track */
+}
+
+.country .menu-items::-webkit-scrollbar-thumb,
+.year .menu-items::-webkit-scrollbar-thumb {
+  background: #555; /* scrollbar color */
+  border-radius: 3px;
+}
+
+/* For Firefox */
+.country .menu-items,
+.year .menu-items {
+  scrollbar-width: thin; /* "auto" or "thin" */
+  scrollbar-color: #555 transparent; /* thumb and track */
+}
+
+.x.label,
+.y.label {
+  font-size: calc(var(--para-size) * 0.8);
+  font-weight: bold;
+  fill: white;
+}
