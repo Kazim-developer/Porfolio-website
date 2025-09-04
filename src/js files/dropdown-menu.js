@@ -101,6 +101,7 @@ export function initDropdownMenu() {
 
           years = [...years].sort((a, b) => a - b);
           yearButton.querySelector(".menu-items").innerHTML = "";
+          yearButton.querySelector(".current-item").textContent = years[0];
 
           for (let year of years) {
             const element = document.createElement("p");
